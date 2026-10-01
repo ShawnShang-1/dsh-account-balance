@@ -1,0 +1,40 @@
+{
+  "name": "dsh-account-balance",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Account menu for the sidebar launcher: recharge balance and cumulative Platform spend above the shipped Settings, Feedback and Sign out rows",
+  "type": "module",
+  "main": "lib/entry.js",
+  "exports": {
+    ".": "./lib/entry.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "lib",
+    "client.js",
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "license": "MIT"
+}

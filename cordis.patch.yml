@@ -1,0 +1,19 @@
+# The dsh-account-balance bundle patch: one insert over the profile root.
+#
+# The row mounts this package's host half — the account overview route on the
+# composed webserver. The browser half is discovered from the same package's
+# `dsh.client` declaration and its `exports["./client"]` bundle; it takes the
+# `settings.launcher` seat and reads the route.
+#
+# The specifier is a path rather than the package name on purpose. The vendored
+# Loader keeps Node's ESM module cache, which is keyed by the exact resolved
+# module URL, so a row that keeps one specifier keeps executing the module it
+# first imported. `lib/entry.js` is a stable shim that re-imports `lib/host.js`
+# by file revision, and targeting the shim by path keeps host edits effective in
+# a running process instead of needing a restart.
+- insert:
+    - id: account-balance
+      name: './lib/entry.js'
+      config:
+        ttlMs: 15000
+        timeoutMs: 15000
